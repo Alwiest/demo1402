@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kyle Kagranes</title>
   <style>
-    /* ——— BASE ——— */
+    /* ——— GLOBAL RESET & THEME ——— */
     * {
       margin: 0;
       padding: 0;
@@ -13,143 +13,248 @@
     }
 
     :root {
-      --fg: #0a0a0a;
-      --bg: #ffffff;
-      --accent: #000000;
-      --muted: #777777;
-      --border: #eeeeee;
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --fg: #f0f0f0;
-        --bg: #0a0a0a;
-        --muted: #999999;
-        --border: #222222;
-      }
+      --bg: #09090b;
+      --fg: #fafafa;
+      --muted: #a1a1aa;
+      --accent: #ffffff;
+      --border: #27272a;
     }
 
     body {
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--fg);
-      padding: 4rem 2rem;
-      max-width: 800px;
-      margin: 0 auto;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ——— TYPOGRAPHY ——— */
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      font-weight: 700;
+      margin: 3rem 0 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    p {
+      font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      max-width: 700px;
     }
 
     a {
       color: var(--accent);
       text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
+      position: relative;
+      font-weight: 600;
     }
 
-    a:hover {
-      border-bottom-color: var(--accent);
+    a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
     }
 
-    h1, h2, h3 {
-      font-weight: 500;
-      letter-spacing: -0.02em;
+    a:hover::after {
+      width: 100%;
     }
 
-    h1 {
-      font-size: 2.8rem;
-      margin: 1.5rem 0 1rem;
+    /* ——— LAYOUT ——— */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    h2 {
-      font-size: 1.4rem;
-      margin: 3rem 0 1.2rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    p {
-      margin: 1.2rem 0;
-      color: var(--fg);
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    li {
-      margin: 0.8rem 0;
-    }
-
-    .spacer {
-      margin-top: 4rem;
-    }
-
-    footer {
-      margin-top: 5rem;
+    /* ——— HERO ——— */
+    .hero {
+      text-align: center;
       padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.9rem;
-      color: var(--muted);
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 2.5rem 1.5rem;
+    .tagline {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ——— PROJECTS ——— */
+    .projects {
+      background: #111115;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 12px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+    }
+
+    .project-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    /* ——— CONTACT ——— */
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .contact-link {
+      padding: 0.6rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .contact-link:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ——— FOOTER ——— */
+    footer {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ——— SCROLL INDICATOR ——— */
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+    }
+
+    @media (min-height: 700px) {
+      .scroll-hint {
+        display: block;
       }
+    }
+
+    .scroll-hint span {
+      display: block;
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+      40% { transform: translateY(-10px) rotate(45deg); }
+    }
+
+    /* ——— MOBILE ——— */
+    @media (max-width: 600px) {
       h1 {
-        font-size: 2.2rem;
+        font-size: clamp(2.5rem, 12vw, 4rem);
+      }
+      section {
+        padding: 2rem 0;
+        min-height: auto;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Kyle Kagranes</h1>
-    <p>Student. Thinker. Builder of quiet things.</p>
-  </header>
-
-  <nav>
-    <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#writing">Writing</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <main>
-    <section id="work">
-      <h2>Work</h2>
-      <ul>
-        <li>
-          <strong>TaskFlow</strong> — A minimalist task manager for focused work. Built with HTML, CSS, and vanilla JS.
-        </li>
-        <li>
-          <strong>Data Lens</strong> — Academic dashboard visualizing course performance over time.
-        </li>
-        <li>
-          <strong>Static Journal</strong> — A personal writing space powered by Markdown and static hosting.
-        </li>
-      </ul>
+  <div class="container">
+    <section class="hero">
+      <h1>Kyle Kagranes</h1>
+      <p class="tagline">Student • Thinker • Builder of digital spaces</p>
+      <p>I craft clean, intentional experiences—online and off.</p>
+      
+      <div class="scroll-hint">
+        <span></span>
+      </div>
     </section>
 
-    <section id="writing" class="spacer">
-      <h2>Writing</h2>
-      <p>I write about learning, simplicity, and the tension between ambition and peace.  
-         Not everything belongs online — but what does, lives <a href="#">here</a>.</p>
+    <section class="projects">
+      <h2>Selected Work</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>Minimal Portfolio</h3>
+          <p>A responsive, zero-dependency personal site built with semantic HTML and modern CSS.</p>
+        </div>
+        <div class="project-card">
+          <h3>Academic Dashboard</h3>
+          <p>Visualizes course progress and deadlines using real-time data and clean charts.</p>
+        </div>
+        <div class="project-card">
+          <h3>Static Journal</h3>
+          <p>A private writing system powered by Markdown, Git, and simplicity.</p>
+        </div>
+      </div>
     </section>
 
-    <section id="contact" class="spacer">
-      <h2>Contact</h2>
-      <p>Reach out via <a href="mailto:kyle@example.com">email</a>.  
-         I don’t use social media much, but you can find my code on <a href="https://github.com/Alwiest" target="_blank">GitHub</a>.</p>
+    <section class="contact">
+      <h2>Get in Touch</h2>
+      <p>I’m open to collaboration, thoughtful projects, or just a good conversation.</p>
+      <div class="contact-links">
+        <a href="mailto:kyle@example.com" class="contact-link">Email</a>
+        <a href="https://github.com/Alwiest" target="_blank" class="contact-link">GitHub</a>
+        <a href="#" class="contact-link">Resume</a>
+      </div>
     </section>
-  </main>
 
-  <footer>
-    <p>© 2026 Kyle Kagranes. Made slowly, with care.</p>
-  </footer>
+    <footer>
+      <p>© 2026 Kyle Kagranes. Built with care, not frameworks.</p>
+    </footer>
+  </div>
 </body>
 </html>
